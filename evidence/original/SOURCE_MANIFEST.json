@@ -1,0 +1,279 @@
+{
+  "name": "earthquake-alert-assurance-engine-0.2.0",
+  "generatedAt": "2026-10-07T12:12:45.208019+00:00",
+  "originalCommit": "b481871ea83d0809c27119011a27d07e8e123724",
+  "originalVersion": "0.2.0",
+  "manifestScope": "All archive members except this manifest; archive has no compiled binaries or dependencies.",
+  "engineSourceUnchanged": true,
+  "validation": {
+    "unitTestsPassed": 14,
+    "assuranceScenariosPassed": 6,
+    "cppLineCoveragePercent": 100,
+    "cppBranchCoveragePercent": 90,
+    "dockerRetested": false,
+    "hostedCiRetested": false,
+    "transportRetested": false
+  },
+  "evidenceNote": "evidence/original and public/data/transport-evidence.json are historical, not new transport tests.",
+  "files": [
+    {
+      "path": ".dockerignore",
+      "bytes": 76,
+      "sha256": "96de320168735815c7a185cea50e0d23b2350f3e50f0985787fa8138ea318223",
+      "originalSha256": null,
+      "classification": "new-documentation-or-packaging"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 78,
+      "sha256": "ecaf47714661f001e731dc2334469c9404c230609dd33e24669499b1bc9b289b",
+      "originalSha256": "ecaf47714661f001e731dc2334469c9404c230609dd33e24669499b1bc9b289b",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": ".gitlab-ci.yml",
+      "bytes": 2116,
+      "sha256": "9571a271b20d40edbcf867ded8c186b6dab545144ede4e30f0bab559936e44b8",
+      "originalSha256": "70813173e9f94a4d6f92021e8fa7c03964b4870f2d1b9da3f53bae59a78f89a6",
+      "classification": "packaging-adapted"
+    },
+    {
+      "path": "Dockerfile",
+      "bytes": 316,
+      "sha256": "763d6c2ed612aa042a265f028e0b1b5276b3b4f5729d5982ef18f32e595adc02",
+      "originalSha256": "f2bf5abb63d1b227c1a1c6a9ad330d84ab5e02bebf0a4fba09e16f7e3efdb902",
+      "classification": "packaging-adapted"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6670,
+      "sha256": "1a4dcf0eeb528bf79d18860bccebdb49804ed18fef41cb258f2814c7e8736460",
+      "originalSha256": "ce7702d7d92050e6620528542bd9bcebe8b7df6383273998d103c19b1d4872c7",
+      "classification": "packaging-adapted"
+    },
+    {
+      "path": "cpp/alert_decision.cpp",
+      "bytes": 2428,
+      "sha256": "2f56e0b0b05477e3cc17f9a78c305a21633e4cd12089a64b6844497ec32ac81d",
+      "originalSha256": "2f56e0b0b05477e3cc17f9a78c305a21633e4cd12089a64b6844497ec32ac81d",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "docker-compose.yml",
+      "bytes": 1252,
+      "sha256": "46711bdfbecdfd8d98f19bc4d1107f90dd4dec743aaf646ba329d0fd25a28e71",
+      "originalSha256": "16ba65b0014b90dfefbbbe08c7664b79effebed6dcd2edc0048e2430dd15cf74",
+      "classification": "packaging-adapted"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "bytes": 3255,
+      "sha256": "6935b54cd9af1462da29b826359a90a544c49f1954e99b6e137145fbf3439116",
+      "originalSha256": "6935b54cd9af1462da29b826359a90a544c49f1954e99b6e137145fbf3439116",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "docs/CLAIMS-BOUNDARY.md",
+      "bytes": 2314,
+      "sha256": "0b6db27cc0c5342bb0d57c3d7ffb3eb29edeb34c113c9d7752a6810e7bf79c9a",
+      "originalSha256": "0b6db27cc0c5342bb0d57c3d7ffb3eb29edeb34c113c9d7752a6810e7bf79c9a",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "docs/MESSAGE-CONTRACTS.md",
+      "bytes": 2151,
+      "sha256": "b6897480557d2b6a0288bae21921420c81cb6a5d24003704240b2f7f3b0271bd",
+      "originalSha256": null,
+      "classification": "new-documentation-or-packaging"
+    },
+    {
+      "path": "docs/REQUIREMENTS-TRACEABILITY.md",
+      "bytes": 3112,
+      "sha256": "5326846f698dfde08c8ae702deebd57e42a4ba6049e892916df42df633e1673c",
+      "originalSha256": "5326846f698dfde08c8ae702deebd57e42a4ba6049e892916df42df633e1673c",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "evidence/current/cpp-coverage.json",
+      "bytes": 6819,
+      "sha256": "3d5d669bcd56f10d355d6379f07145398dd517c173a4ebc96594f7ce235aad49",
+      "originalSha256": null,
+      "classification": "generated-evidence"
+    },
+    {
+      "path": "evidence/current/cpp-coverage.txt",
+      "bytes": 1615,
+      "sha256": "1af1f12c7b5cc90ec8f404e2c6168cb4290412f24f3decb36e37de1d29a873e8",
+      "originalSha256": null,
+      "classification": "generated-evidence"
+    },
+    {
+      "path": "evidence/current/unit-tests.tap",
+      "bytes": 2424,
+      "sha256": "7f9a15bd962b769422b6ab3faba28e00be7132ccaa7d3c53b3ada692460e58ec",
+      "originalSha256": null,
+      "classification": "generated-evidence"
+    },
+    {
+      "path": "evidence/original/assurance-report.json",
+      "bytes": 6613,
+      "sha256": "2113c0e6d9d82cb09d17ba17b194d1da5a536c6f7e14d206ff77a01967821c1b",
+      "originalSha256": "2113c0e6d9d82cb09d17ba17b194d1da5a536c6f7e14d206ff77a01967821c1b",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "evidence/original/transport-evidence.json",
+      "bytes": 1541,
+      "sha256": "0c141eba525a732ce32761ebf924e997735144d1bb3a695c8cac31de2c4ab6be",
+      "originalSha256": "0c141eba525a732ce32761ebf924e997735144d1bb3a695c8cac31de2c4ab6be",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "nats/nats.conf",
+      "bytes": 143,
+      "sha256": "bd90bc201ac6c1ef85c1011cc9dd4016f7faf8f970b802c773a813af1e7fe3c4",
+      "originalSha256": "bd90bc201ac6c1ef85c1011cc9dd4016f7faf8f970b802c773a813af1e7fe3c4",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 1565,
+      "sha256": "464e69e78fe7960c45e0907bc721e784a170f6ce21721ad354f7d9d14f79d19c",
+      "originalSha256": "464e69e78fe7960c45e0907bc721e784a170f6ce21721ad354f7d9d14f79d19c",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "package.json",
+      "bytes": 1002,
+      "sha256": "e2d03282979359a2d9f2817127edb2d3f234bc81a14fa2d255edc5c57b2de313",
+      "originalSha256": "07cdf7b2bbac293cf962da89d5915d5e5c6e8c534219ff45015442ee0e20badd",
+      "classification": "packaging-adapted"
+    },
+    {
+      "path": "public/app.js",
+      "bytes": 9316,
+      "sha256": "ece204178a8a85690f98caf14ea51ed38eb40b7af0868e3795e1c20e2896667e",
+      "originalSha256": "ece204178a8a85690f98caf14ea51ed38eb40b7af0868e3795e1c20e2896667e",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "public/data/assurance-report.json",
+      "bytes": 4786,
+      "sha256": "38b8a8a8515c84d34397bdf20e081d19ee687c96688091206ccb9021a8ce3cff",
+      "originalSha256": "2113c0e6d9d82cb09d17ba17b194d1da5a536c6f7e14d206ff77a01967821c1b",
+      "classification": "generated-evidence"
+    },
+    {
+      "path": "public/data/transport-evidence.json",
+      "bytes": 1541,
+      "sha256": "0c141eba525a732ce32761ebf924e997735144d1bb3a695c8cac31de2c4ab6be",
+      "originalSha256": "0c141eba525a732ce32761ebf924e997735144d1bb3a695c8cac31de2c4ab6be",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "public/decision-model.js",
+      "bytes": 3590,
+      "sha256": "050b8c6c6c68e3b3ba787db5ce932ff0e4029da3e41672aeec889e246a382a3d",
+      "originalSha256": "050b8c6c6c68e3b3ba787db5ce932ff0e4029da3e41672aeec889e246a382a3d",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "public/favicon.svg",
+      "bytes": 231,
+      "sha256": "8046520dd8d00841d3396987896fca33b91502db1ce6032c0582d10775d63e27",
+      "originalSha256": "8046520dd8d00841d3396987896fca33b91502db1ce6032c0582d10775d63e27",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "public/index.html",
+      "bytes": 8474,
+      "sha256": "b80fe5c183e9942de352f3f180b0d5c4a151bf0ac76ee42077f21f19dd2ebdc1",
+      "originalSha256": "b80fe5c183e9942de352f3f180b0d5c4a151bf0ac76ee42077f21f19dd2ebdc1",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "public/styles.css",
+      "bytes": 9010,
+      "sha256": "0de036e30c1e49a3897d1c8fabbc8e7d8f7cd577c9ca2112af70e613b433c848",
+      "originalSha256": "0de036e30c1e49a3897d1c8fabbc8e7d8f7cd577c9ca2112af70e613b433c848",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "scripts/coverage.mjs",
+      "bytes": 1563,
+      "sha256": "8ca46c7ad808d084b26322cb6a1453117cda065e39b696a432208abff4247528",
+      "originalSha256": "8ca46c7ad808d084b26322cb6a1453117cda065e39b696a432208abff4247528",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "scripts/provenance.mjs",
+      "bytes": 1718,
+      "sha256": "aaa52e781fc611c977588d46f53e3314c9180b4abd939ce346e55ea02af00eef",
+      "originalSha256": "5c4bc6045e9a7ca56dda0c8a681334a28afc05718b142ae40598dc86f240b278",
+      "classification": "packaging-adapted"
+    },
+    {
+      "path": "scripts/run-assurance.mjs",
+      "bytes": 2770,
+      "sha256": "b19a4e30c692c0a81157f054e76b9f5f1b09dfcdb8972ffd6a38f8f39b7220cc",
+      "originalSha256": "b19a4e30c692c0a81157f054e76b9f5f1b09dfcdb8972ffd6a38f8f39b7220cc",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "scripts/verify-transport.mjs",
+      "bytes": 3061,
+      "sha256": "6322fffdc68245dc50c9cfafee6809ad0cb03734bd73d4a37522da4227372c36",
+      "originalSha256": "6322fffdc68245dc50c9cfafee6809ad0cb03734bd73d4a37522da4227372c36",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "services/aggregator.mjs",
+      "bytes": 1341,
+      "sha256": "c19417fee7e6534e6cd72ffd6917284c864e8d1cd7cd6ffd6c8f169a7e3fb22a",
+      "originalSha256": "c19417fee7e6534e6cd72ffd6917284c864e8d1cd7cd6ffd6c8f169a7e3fb22a",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "services/decision-worker.mjs",
+      "bytes": 1642,
+      "sha256": "3edc7b4ab48c85e0e20e8b35e54e71ac52a1fd5a469714835ea899be8161b2fd",
+      "originalSha256": "3edc7b4ab48c85e0e20e8b35e54e71ac52a1fd5a469714835ea899be8161b2fd",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "services/ingestor.mjs",
+      "bytes": 2836,
+      "sha256": "960c7c89641d7ee9d49016955ddebfe5a6bc1f4fe44ad439012ee7af0f43254b",
+      "originalSha256": "960c7c89641d7ee9d49016955ddebfe5a6bc1f4fe44ad439012ee7af0f43254b",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "services/nats-client.mjs",
+      "bytes": 1519,
+      "sha256": "966a3401c3186d0a6f1b825281c3442adf01c041843b1a288e590e02c58fe174",
+      "originalSha256": "966a3401c3186d0a6f1b825281c3442adf01c041843b1a288e590e02c58fe174",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "services/static-server.mjs",
+      "bytes": 1284,
+      "sha256": "dcf89209b49a759cd86893390b3c99e5191f1bbc6530f8cb49c594efe4f67921",
+      "originalSha256": "dcf89209b49a759cd86893390b3c99e5191f1bbc6530f8cb49c594efe4f67921",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "tests/browser_model.test.mjs",
+      "bytes": 2631,
+      "sha256": "4de9e263ccda438121bfbeaa93fd0439ccab68879bd70d465fac4f8dd7422584",
+      "originalSha256": "4de9e263ccda438121bfbeaa93fd0439ccab68879bd70d465fac4f8dd7422584",
+      "classification": "copied-unchanged"
+    },
+    {
+      "path": "tests/decision_engine.test.mjs",
+      "bytes": 1779,
+      "sha256": "5902b93385ca303c058ecd516811c78efdc6524e2936ff16a05cc78137ac558c",
+      "originalSha256": "5902b93385ca303c058ecd516811c78efdc6524e2936ff16a05cc78137ac558c",
+      "classification": "copied-unchanged"
+    }
+  ]
+}

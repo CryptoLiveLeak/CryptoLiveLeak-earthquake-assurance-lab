@@ -1,0 +1,11 @@
+CryptoLiveLeak Earthquake Assurance Lab
+Copyright 2026 CryptoLiveLeak, Inc.
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE),
+except the WordPress plugin and theme under wordpress/, which are licensed
+GPL-2.0-or-later as WordPress extensions (see wordpress/LICENSE).
+
+This is an independent reference implementation using public and synthetic data.
+It is not affiliated with or endorsed by the U.S. Geological Survey and is not
+deployed for public warning or life-safety decisions. USGS earthquake catalog data,
+retrieved only when the catalog mode is selected, is public-domain U.S. Government data.

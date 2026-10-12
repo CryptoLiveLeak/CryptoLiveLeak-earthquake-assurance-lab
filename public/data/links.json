@@ -1,0 +1,5 @@
+{
+  "repository": "https://github.com/CryptoLiveLeak/cryptoliveleak-earthquake-assurance-lab",
+  "pipeline": "https://github.com/CryptoLiveLeak/cryptoliveleak-earthquake-assurance-lab/actions",
+  "statusNote": "Source, findings log, and every CI run (build, static analysis, sanitizers, unit and integration tests, coverage, metrics, SBOM) are public in the repository."
+}

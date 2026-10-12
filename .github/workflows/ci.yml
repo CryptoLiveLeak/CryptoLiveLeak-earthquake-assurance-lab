@@ -1,0 +1,103 @@
+name: ci
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+env:
+  NATS_VERSION: "2.10.22"
+  NATS_SHA256: "db0b3ccbe4cbdd3872ae7486ec4f6b0f85824632a0789f4da2e0a8518390483e"
+
+jobs:
+  build-test-analyze:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Toolchain
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq clang clang-tidy cppcheck llvm libclang-rt-18-dev php-cli zip
+          pip install --quiet lizard multimetric
+      - run: npm ci
+      - name: Build (warnings are errors)
+        run: npm run build
+      - name: Unit, parity, contract, and public-bundle tests
+        run: node --test --test-reporter=spec --test-reporter=junit --test-reporter-destination=stdout --test-reporter-destination=reports-junit.xml tests/*.test.mjs
+      - name: AddressSanitizer + UndefinedBehaviorSanitizer
+        run: npm run test:sanitized
+      - name: Static analysis
+        run: |
+          mkdir -p reports
+          clang-tidy --warnings-as-errors='*' cpp/alert_decision.cpp -- -std=c++20 | tee reports/clang-tidy.txt
+          cppcheck --enable=warning,style,performance,portability --error-exitcode=1 cpp 2>&1 | tee reports/cppcheck.txt
+      - name: C++ coverage (LLVM)
+        run: npm run coverage:cpp
+      - name: Code metrics (LOC, cyclomatic complexity, Halstead)
+        run: npm run metrics
+      - name: SBOM and dependency audit
+        run: |
+          npm run sbom
+          npm audit --omit dev --audit-level=moderate
+      - name: Assurance scenarios
+        run: npm run assure
+      - name: PHP lint and WordPress packages
+        run: |
+          npm run lint:php
+          npm run package:wordpress
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evidence-${{ github.sha }}
+          path: |
+            reports/
+            reports-junit.xml
+            public/data/assurance-report.json
+            dist/
+
+  integration:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci && npm run build
+      - name: Start pinned NATS JetStream (checksum verified)
+        run: |
+          curl -sSLo nats.tgz "https://github.com/nats-io/nats-server/releases/download/v${NATS_VERSION}/nats-server-v${NATS_VERSION}-linux-amd64.tar.gz"
+          echo "${NATS_SHA256}  nats.tgz" | sha256sum -c -
+          tar xzf nats.tgz
+          ./nats-server-v${NATS_VERSION}-linux-amd64/nats-server -a 127.0.0.1 -js -sd "$RUNNER_TEMP/js" -m 8222 > nats.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:8222/healthz && break; sleep 1; done
+      - name: Fault-injection integration suite
+        run: npm run verify:integration
+      - name: Transport configuration evidence
+        run: npm run verify:transport
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: integration-evidence-${{ github.sha }}
+          path: |
+            public/data/integration-evidence.json
+            public/data/transport-evidence.json
+            nats.log
+
+  ansible:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install --quiet ansible-core ansible-lint
+      - run: ansible-playbook -i ansible/inventory.ini ansible/site.yml --syntax-check
+      - run: ansible-lint --profile production ansible/

@@ -1,0 +1,14 @@
+[Unit]
+Description=Earthquake Assurance Lab - NATS JetStream (loopback only)
+After=network.target
+
+[Service]
+User={{ lab_user }}
+ExecStart=/opt/nats-server-v{{ nats_version }}-linux-amd64/nats-server -a 127.0.0.1 -js -sd {{ lab_home }}/jetstream -m 8222
+Restart=on-failure
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths={{ lab_home }}
+
+[Install]
+WantedBy=multi-user.target

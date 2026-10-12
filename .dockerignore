@@ -1,0 +1,11 @@
+node_modules
+build
+dist
+reports
+.git
+.env
+.env.*
+*.pem
+*.key
+*.log
+releases

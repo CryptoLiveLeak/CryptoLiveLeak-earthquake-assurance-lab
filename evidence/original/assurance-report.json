@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-06T10:41:22.229Z",
+  "release": "2976dd279a3d9f358e01bfb1b78cd6bbdc3fa003",
+  "provenance": {
+    "commit": "2976dd279a3d9f358e01bfb1b78cd6bbdc3fa003",
+    "workingTreeDirty": false,
+    "sourceSha256": "e02f362897d0ace0b1ce8ca04979aa09ba7ac096bf506f9a75cd26386e4ab2d1",
+    "inputs": [
+      [
+        ".gitlab-ci.yml",
+        "70813173e9f94a4d6f92021e8fa7c03964b4870f2d1b9da3f53bae59a78f89a6"
+      ],
+      [
+        "cpp/alert_decision.cpp",
+        "2f56e0b0b05477e3cc17f9a78c305a21633e4cd12089a64b6844497ec32ac81d"
+      ],
+      [
+        "docs/ARCHITECTURE.md",
+        "6935b54cd9af1462da29b826359a90a544c49f1954e99b6e137145fbf3439116"
+      ],
+      [
+        "docs/CLAIMS-BOUNDARY.md",
+        "0b6db27cc0c5342bb0d57c3d7ffb3eb29edeb34c113c9d7752a6810e7bf79c9a"
+      ],
+      [
+        "docs/DEPLOYMENT-AND-PROPOSAL-PLAN.md",
+        "23f9ec9fc48ce2d24f064ad7fea6c97bc7a22b83e07ea0fb56169ccc52a4ef47"
+      ],
+      [
+        "docs/REQUIREMENTS-TRACEABILITY.md",
+        "5326846f698dfde08c8ae702deebd57e42a4ba6049e892916df42df633e1673c"
+      ],
+      [
+        "docs/WORDPRESS-DEPLOYMENT.md",
+        "f105f1492c99960d3b57ca09c056fc7fbcb7823968b129e7589fadd9e5fdc3b2"
+      ],
+      [
+        "package-lock.json",
+        "464e69e78fe7960c45e0907bc721e784a170f6ce21721ad354f7d9d14f79d19c"
+      ],
+      [
+        "package.json",
+        "07cdf7b2bbac293cf962da89d5915d5e5c6e8c534219ff45015442ee0e20badd"
+      ],
+      [
+        "public/app.js",
+        "ece204178a8a85690f98caf14ea51ed38eb40b7af0868e3795e1c20e2896667e"
+      ],
+      [
+        "public/decision-model.js",
+        "050b8c6c6c68e3b3ba787db5ce932ff0e4029da3e41672aeec889e246a382a3d"
+      ],
+      [
+        "public/index.html",
+        "b80fe5c183e9942de352f3f180b0d5c4a151bf0ac76ee42077f21f19dd2ebdc1"
+      ],
+      [
+        "public/styles.css",
+        "0de036e30c1e49a3897d1c8fabbc8e7d8f7cd577c9ca2112af70e613b433c848"
+      ],
+      [
+        "scripts/build-wordpress.mjs",
+        "d3f3fcc579df5b261ae8a0eb2db6cc0b9ab0e6cc5c76c56e1e88205b49f67355"
+      ],
+      [
+        "scripts/coverage.mjs",
+        "8ca46c7ad808d084b26322cb6a1453117cda065e39b696a432208abff4247528"
+      ],
+      [
+        "scripts/provenance.mjs",
+        "5c4bc6045e9a7ca56dda0c8a681334a28afc05718b142ae40598dc86f240b278"
+      ],
+      [
+        "scripts/run-assurance.mjs",
+        "b19a4e30c692c0a81157f054e76b9f5f1b09dfcdb8972ffd6a38f8f39b7220cc"
+      ],
+      [
+        "scripts/test-wordpress.mjs",
+        "4780834f0e203bba72321b893f3847b0f8f2238e9eec04c5b8476806dd7139fd"
+      ],
+      [
+        "scripts/verify-transport.mjs",
+        "6322fffdc68245dc50c9cfafee6809ad0cb03734bd73d4a37522da4227372c36"
+      ],
+      [
+        "services/aggregator.mjs",
+        "c19417fee7e6534e6cd72ffd6917284c864e8d1cd7cd6ffd6c8f169a7e3fb22a"
+      ],
+      [
+        "services/decision-worker.mjs",
+        "3edc7b4ab48c85e0e20e8b35e54e71ac52a1fd5a469714835ea899be8161b2fd"
+      ],
+      [
+        "services/ingestor.mjs",
+        "960c7c89641d7ee9d49016955ddebfe5a6bc1f4fe44ad439012ee7af0f43254b"
+      ],
+      [
+        "services/nats-client.mjs",
+        "966a3401c3186d0a6f1b825281c3442adf01c041843b1a288e590e02c58fe174"
+      ],
+      [
+        "services/static-server.mjs",
+        "dcf89209b49a759cd86893390b3c99e5191f1bbc6530f8cb49c594efe4f67921"
+      ],
+      [
+        "tests/browser_model.test.mjs",
+        "4de9e263ccda438121bfbeaa93fd0439ccab68879bd70d465fac4f8dd7422584"
+      ],
+      [
+        "tests/decision_engine.test.mjs",
+        "5902b93385ca303c058ecd516811c78efdc6524e2936ff16a05cc78137ac558c"
+      ],
+      [
+        "tests/wordpress_embed.test.mjs",
+        "14273101732c55b45c0ecf66cc8eb4a335eaf9fc5c18914b0e8da7b6d9207cf8"
+      ],
+      [
+        "wordpress/plugin/cll-earthquake-lab/cll-earthquake-lab.php",
+        "c27d470bf4a348c625a2393c7f82ce30a9bc143243d5b8144f54ce0c78d8d75e"
+      ],
+      [
+        "wordpress/plugin/cll-earthquake-lab/embed.css",
+        "032fd13272c5fec774d4828c99c38bb8b011f91942d9e88f5d4ad43b31a2717b"
+      ],
+      [
+        "wordpress/plugin/cll-earthquake-lab/embed.js",
+        "90bf516ee87a0276ce02cbe821001583e4e4cb6692ebadc9c42ddaf61e4753af"
+      ],
+      [
+        "wordpress/theme/cll-assurance-lab/footer.php",
+        "082bf6030d03afecd72333f71d6412b4ec5a904b119a1ec9af0cadc66c890028"
+      ],
+      [
+        "wordpress/theme/cll-assurance-lab/front-page.php",
+        "747428ad5ba2f6d9b3786ce9d52be0ef4871034c1a2cd06c022074f4c52054d9"
+      ],
+      [
+        "wordpress/theme/cll-assurance-lab/functions.php",
+        "a13d536dad951c564d6326b91f1b63d9139f88d8035cb539b5e2d7eef0a0a2b6"
+      ],
+      [
+        "wordpress/theme/cll-assurance-lab/header.php",
+        "8060833448cbfdadba675b4c6e5f9d0bba34c0db1f2b55a8ecc16f78febc21b2"
+      ],
+      [
+        "wordpress/theme/cll-assurance-lab/index.php",
+        "64190bbbfee4e5f1440a011d99ecae0e2782fb386e759faf222768abdc102aba"
+      ],
+      [
+        "wordpress/theme/cll-assurance-lab/style.css",
+        "ba60cf98c8151080dadf2d1cfd165b2261ddccd1e10be69dee7a88b1dcaab899"
+      ]
+    ],
+    "digitallySigned": false
+  },
+  "timingScope": "Process launch plus execution; six single observations, not a real-time SLA or performance benchmark.",
+  "profile": "reference-implementation",
+  "operationalUse": false,
+  "scenarios": [
+    {
+      "name": "nominal_candidate",
+      "passed": true,
+      "expected": "test_threshold_met",
+      "observed": "test_threshold_met",
+      "latencyMicros": 6015
+    },
+    {
+      "name": "below_threshold",
+      "passed": true,
+      "expected": "below_test_threshold",
+      "observed": "below_test_threshold",
+      "latencyMicros": 3706
+    },
+    {
+      "name": "stale_event",
+      "passed": true,
+      "expected": "stale_event",
+      "observed": "stale_event",
+      "latencyMicros": 3682
+    },
+    {
+      "name": "low_quality",
+      "passed": true,
+      "expected": "insufficient_quality",
+      "observed": "insufficient_quality",
+      "latencyMicros": 3591
+    },
+    {
+      "name": "invalid_latitude",
+      "passed": true,
+      "expected": "input_out_of_range",
+      "observed": "input_out_of_range",
+      "latencyMicros": 4496
+    },
+    {
+      "name": "invalid_depth",
+      "passed": true,
+      "expected": "input_out_of_range",
+      "observed": "input_out_of_range",
+      "latencyMicros": 3615
+    }
+  ],
+  "summary": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "p95LatencyMicros": 6015,
+    "evidenceHash": "872e65f6bfe2115a361c8f5df8111923726649de4ed66de201bc842bf043f236"
+  }
+}

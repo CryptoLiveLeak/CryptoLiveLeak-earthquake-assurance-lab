@@ -1,0 +1,97 @@
+---
+# Reproducible single-host deployment of the lab for controlled demonstrations.
+# Usage: ansible-playbook -i inventory.ini site.yml [--check --diff]
+# Broker and services bind to loopback; nothing is exposed publicly.
+- name: Deploy Earthquake Assurance Lab
+  hosts: lab
+  become: true
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Install build and runtime packages
+      ansible.builtin.apt:
+        name: [clang, nodejs, npm, git]
+        state: present
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: Create service account
+      ansible.builtin.user:
+        name: "{{ lab_user }}"
+        system: true
+        shell: /usr/sbin/nologin
+        home: "{{ lab_home }}"
+
+    - name: Download pinned NATS server release
+      ansible.builtin.get_url:
+        url: "https://github.com/nats-io/nats-server/releases/download/v{{ nats_version }}/nats-server-v{{ nats_version }}-linux-amd64.tar.gz"
+        dest: "/tmp/nats-server-{{ nats_version }}.tar.gz"
+        checksum: "sha256:{{ nats_sha256 }}"
+        mode: "0644"
+
+    - name: Unpack NATS server
+      ansible.builtin.unarchive:
+        src: "/tmp/nats-server-{{ nats_version }}.tar.gz"
+        dest: /opt
+        remote_src: true
+        creates: "/opt/nats-server-v{{ nats_version }}-linux-amd64/nats-server"
+
+    - name: Check out the tagged lab release
+      ansible.builtin.git:
+        repo: "{{ lab_repo }}"
+        dest: "{{ lab_home }}/app"
+        version: "{{ lab_version }}"
+        force: true
+      become: true
+      become_user: "{{ lab_user }}"
+      notify: Restart lab services
+
+    - name: Install locked Node dependencies
+      ansible.builtin.command:
+        cmd: npm ci --omit=dev
+        chdir: "{{ lab_home }}/app"
+        creates: "{{ lab_home }}/app/node_modules/nats/package.json"
+      become: true
+      become_user: "{{ lab_user }}"
+
+    - name: Build and verify the decision engine
+      ansible.builtin.command:
+        cmd: npm run verify
+        chdir: "{{ lab_home }}/app"
+      become: true
+      become_user: "{{ lab_user }}"
+      changed_when: false
+
+    - name: Install systemd units
+      ansible.builtin.template:
+        src: "{{ item }}.service.j2"
+        dest: "/etc/systemd/system/{{ item }}.service"
+        mode: "0644"
+      loop: [lab-nats, lab-decision-worker, lab-aggregator]
+      notify: Restart lab services
+
+    - name: Enable and start services
+      ansible.builtin.systemd_service:
+        name: "{{ item }}"
+        enabled: true
+        state: started
+        daemon_reload: true
+      loop: [lab-nats, lab-decision-worker, lab-aggregator]
+
+  post_tasks:
+    - name: Smoke test - broker health endpoint
+      ansible.builtin.uri:
+        url: http://127.0.0.1:8222/healthz
+        status_code: 200
+      register: lab_health
+      retries: 10
+      delay: 2
+      until: lab_health.status == 200
+
+  handlers:
+    - name: Restart lab services
+      ansible.builtin.systemd_service:
+        name: "{{ item }}"
+        state: restarted
+        daemon_reload: true
+      loop: [lab-nats, lab-decision-worker, lab-aggregator]

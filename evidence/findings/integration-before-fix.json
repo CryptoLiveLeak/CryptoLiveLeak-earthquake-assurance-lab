@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-12T14:24:07.208Z",
+  "release": "0.2.0 services (pre-fix)",
+  "provenance": {
+    "note": "original services from engine export 0.2.0 (export commit b481871); harness from this repository"
+  },
+  "scope": "BEFORE FIX: the same integration suite run against the original 0.2.0 decision-worker and aggregator (queue group removed from consumer options), to show which defects each scenario detects. Fault-injection integration run against a single local NATS JetStream server. Not a load, latency, or availability test.",
+  "natsServer": "2.10.22",
+  "scenarios": [
+    {
+      "name": "end_to_end_candidate",
+      "finding": null,
+      "description": "A valid candidate event flows ingest -> C++ decision -> aggregator -> simulated alert.",
+      "passed": true,
+      "observed": {
+        "alerts": 1,
+        "reason": "test_threshold_met",
+        "simulationOnly": true
+      },
+      "durationMs": 113
+    },
+    {
+      "name": "fail_closed_ingestion",
+      "finding": "CLL-001",
+      "description": "Features with null magnitude, null depth, or no event time are rejected at ingestion instead of being coerced.",
+      "passed": true,
+      "observed": {
+        "rejected": [
+          "missing_magnitude",
+          "missing_depth",
+          "missing_event_time"
+        ]
+      },
+      "durationMs": 0
+    },
+    {
+      "name": "invalid_event_dead_lettered",
+      "finding": "CLL-001",
+      "description": "An event that bypasses the ingestor with a null depth is dead-lettered by the worker and never decided.",
+      "passed": false,
+      "observed": "timed out waiting for dead letter",
+      "durationMs": 10092
+    },
+    {
+      "name": "poison_message_bounded_redelivery",
+      "finding": "CLL-004",
+      "description": "An undecodable message is retried exactly 3 times, then dead-lettered (previously dropped silently).",
+      "passed": false,
+      "observed": "timed out waiting for poison dead letter",
+      "durationMs": 20055
+    },
+    {
+      "name": "revision_zero_replay",
+      "finding": "CLL-002",
+      "description": "A revision-0 decision replayed with a new message ID (as after the dedupe window) yields one alert, not two.",
+      "passed": false,
+      "observed": "2 simulated alerts for one event revision",
+      "durationMs": 1621
+    },
+    {
+      "name": "out_of_order_revision",
+      "finding": null,
+      "description": "An older revision arriving after a newer one is suppressed.",
+      "passed": true,
+      "observed": {
+        "alerts": 1,
+        "keptRevision": 10,
+        "rejected": "out_of_order_revision"
+      },
+      "durationMs": 1620
+    },
+    {
+      "name": "future_timestamp_rejected",
+      "finding": "CLL-001",
+      "description": "An event timestamped 60 s in the future is rejected as out of range instead of clamped to zero age.",
+      "passed": false,
+      "observed": "test_threshold_met",
+      "durationMs": 122
+    },
+    {
+      "name": "worker_restart_resumes",
+      "finding": "CLL-007",
+      "description": "With the worker stopped (graceful drain), a published event waits in the durable consumer and is processed after restart.",
+      "passed": true,
+      "observed": {
+        "decidedWhileStopped": 0,
+        "alertsAfterRestart": 1
+      },
+      "durationMs": 1226
+    },
+    {
+      "name": "queue_group_scale_out",
+      "finding": "CLL-005",
+      "description": "With two worker replicas, each of 20 events is decided exactly once (previously every replica processed every event).",
+      "passed": false,
+      "observed": "timed out waiting for worker-b ready",
+      "durationMs": 10048
+    }
+  ],
+  "stream": {
+    "messages": 19
+  },
+  "summary": {
+    "total": 9,
+    "passed": 4,
+    "failed": 5,
+    "evidenceHash": "f59db63daa813418409cb4b2d3e8b45ed4d38b4ad0bb7f17ae7bdf024e4bb0a8"
+  }
+}

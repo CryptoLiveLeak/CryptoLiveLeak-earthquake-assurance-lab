@@ -1,0 +1,11 @@
+node_modules/
+build/
+dist/
+.DS_Store
+.sites-runtime/
+*.log
+reports/
+releases/
+reports-junit.xml
+test-results.xml
+.npm/

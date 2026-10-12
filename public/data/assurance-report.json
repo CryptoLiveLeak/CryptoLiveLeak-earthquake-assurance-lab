@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-12T14:25:43.142Z",
+  "release": "source-export",
+  "provenance": {
+    "commit": "source-export",
+    "workingTreeDirty": null,
+    "sourceSha256": "2cbedee01f545c97a0e9773666b529429de48abfa138f40385650912de49a127",
+    "inputs": [
+      [
+        ".gitlab-ci.yml",
+        "9571a271b20d40edbcf867ded8c186b6dab545144ede4e30f0bab559936e44b8"
+      ],
+      [
+        "cpp/alert_decision.cpp",
+        "afb80c91016905540dc1276287dbef8740865ea14c8bb4dc523f555594e81784"
+      ],
+      [
+        "docs/ARCHITECTURE.md",
+        "54b976d8633cafbc0fee217801b34bd2426be5b43bdfb2c5d62b16e3cb1f61ee"
+      ],
+      [
+        "docs/CLAIMS-BOUNDARY.md",
+        "d7926a037fa7e90036cc7fead53e340eca84b1ae2f2ad5b4c3fcfc6d46ea0c37"
+      ],
+      [
+        "docs/MESSAGE-CONTRACTS.md",
+        "b6897480557d2b6a0288bae21921420c81cb6a5d24003704240b2f7f3b0271bd"
+      ],
+      [
+        "docs/REQUIREMENTS-TRACEABILITY.md",
+        "53f25627ec7ee42db5dd9f5412683787cdb3e22efe73f1c0f17524a4fc5aab20"
+      ],
+      [
+        "docs/WORDPRESS-DEPLOYMENT.md",
+        "79727296437c6d217bcdf2448d61b18328d8e480b9ef9cdb709942d563da04c7"
+      ],
+      [
+        "nats/nats.conf",
+        "bd90bc201ac6c1ef85c1011cc9dd4016f7faf8f970b802c773a813af1e7fe3c4"
+      ],
+      [
+        "package-lock.json",
+        "464e69e78fe7960c45e0907bc721e784a170f6ce21721ad354f7d9d14f79d19c"
+      ],
+      [
+        "package.json",
+        "e2d03282979359a2d9f2817127edb2d3f234bc81a14fa2d255edc5c57b2de313"
+      ],
+      [
+        "public/app.js",
+        "7c7032db1d12bf0e8f60c45b5421f2a760056ace21bc91ad506917d599dd34d2"
+      ],
+      [
+        "public/decision-model.js",
+        "050b8c6c6c68e3b3ba787db5ce932ff0e4029da3e41672aeec889e246a382a3d"
+      ],
+      [
+        "public/index.html",
+        "7d0c23b82142bcb491393ad7581aeab6aa36a7498442cec7aaf34c68969fb72e"
+      ],
+      [
+        "public/styles.css",
+        "c5ddb57c91a00d88e4fd7a8c6a77f3222fd7e0b759a4ad2d592e0556eadba9de"
+      ],
+      [
+        "scripts/coverage.mjs",
+        "8ca46c7ad808d084b26322cb6a1453117cda065e39b696a432208abff4247528"
+      ],
+      [
+        "scripts/provenance.mjs",
+        "aaa52e781fc611c977588d46f53e3314c9180b4abd939ce346e55ea02af00eef"
+      ],
+      [
+        "scripts/run-assurance.mjs",
+        "b19a4e30c692c0a81157f054e76b9f5f1b09dfcdb8972ffd6a38f8f39b7220cc"
+      ],
+      [
+        "scripts/verify-integration.mjs",
+        "ddf38b390ea80ad85565ecbe1d455f01cf83472532bf6612d49268b43a2eb1ae"
+      ],
+      [
+        "scripts/verify-transport.mjs",
+        "6322fffdc68245dc50c9cfafee6809ad0cb03734bd73d4a37522da4227372c36"
+      ],
+      [
+        "services/aggregator.mjs",
+        "fe3e98b4f6000b514fa8054e616af5eabd66e71142a6d868d62c8fa3905cd331"
+      ],
+      [
+        "services/decision-worker.mjs",
+        "4b714f994a26018d48ace2218393c72a5b5fe35916abe4801503a202c114e381"
+      ],
+      [
+        "services/ingestor.mjs",
+        "932dad1a8569ce61c831e8df1a4ca1206a207e6495b735aea9db5e1e8c03907e"
+      ],
+      [
+        "services/lib/event-contract.mjs",
+        "38010da11eb1caa7953df719823a32ab3c4194bd21d20a130f1eab045f104530"
+      ],
+      [
+        "services/lib/failure-handling.mjs",
+        "411d7647475e0e592e3400118d2084398b4b11d5dead95e0324f2227122a5e25"
+      ],
+      [
+        "services/lib/revision-gate.mjs",
+        "46dba54dee956ae15d7aae2ab59756bd5830df120576063afe16bff144979940"
+      ],
+      [
+        "services/nats-client.mjs",
+        "19bd2a706adf5f7fc62605346e46dd2ef4dcf6b570d2d875c69206c244923279"
+      ],
+      [
+        "services/static-server.mjs",
+        "dcf89209b49a759cd86893390b3c99e5191f1bbc6530f8cb49c594efe4f67921"
+      ],
+      [
+        "tests/browser_model.test.mjs",
+        "4de9e263ccda438121bfbeaa93fd0439ccab68879bd70d465fac4f8dd7422584"
+      ],
+      [
+        "tests/decision_engine.test.mjs",
+        "5902b93385ca303c058ecd516811c78efdc6524e2936ff16a05cc78137ac558c"
+      ],
+      [
+        "tests/decision_model.test.mjs",
+        "2722913a0906314b45b72c24408aacb9f7ebe010341b79663765dc662428751b"
+      ],
+      [
+        "tests/event_contract.test.mjs",
+        "f66ecd3c104c7b3b678c317ff0e7e746912468e517e4314876a3c7c059704756"
+      ],
+      [
+        "tests/public_bundle.test.mjs",
+        "30032f040d815de39309bedb75dad685dd1614fe684feef09808b8977bbdc0b7"
+      ]
+    ],
+    "digitallySigned": false
+  },
+  "timingScope": "Process launch plus execution; six single observations, not a real-time SLA or performance benchmark.",
+  "profile": "reference-implementation",
+  "operationalUse": false,
+  "scenarios": [
+    {
+      "name": "nominal_candidate",
+      "passed": true,
+      "expected": "test_threshold_met",
+      "observed": "test_threshold_met",
+      "latencyMicros": 5860
+    },
+    {
+      "name": "below_threshold",
+      "passed": true,
+      "expected": "below_test_threshold",
+      "observed": "below_test_threshold",
+      "latencyMicros": 3778
+    },
+    {
+      "name": "stale_event",
+      "passed": true,
+      "expected": "stale_event",
+      "observed": "stale_event",
+      "latencyMicros": 3645
+    },
+    {
+      "name": "low_quality",
+      "passed": true,
+      "expected": "insufficient_quality",
+      "observed": "insufficient_quality",
+      "latencyMicros": 4097
+    },
+    {
+      "name": "invalid_latitude",
+      "passed": true,
+      "expected": "input_out_of_range",
+      "observed": "input_out_of_range",
+      "latencyMicros": 3936
+    },
+    {
+      "name": "invalid_depth",
+      "passed": true,
+      "expected": "input_out_of_range",
+      "observed": "input_out_of_range",
+      "latencyMicros": 3524
+    }
+  ],
+  "summary": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "p95LatencyMicros": 5860,
+    "evidenceHash": "872e65f6bfe2115a361c8f5df8111923726649de4ed66de201bc842bf043f236"
+  }
+}

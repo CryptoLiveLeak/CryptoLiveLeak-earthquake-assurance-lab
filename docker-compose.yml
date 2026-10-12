@@ -1,0 +1,54 @@
+services:
+  nats:
+    image: nats:2.10-alpine
+    command: ["-c", "/etc/nats/nats.conf"]
+    volumes:
+      - ./nats/nats.conf:/etc/nats/nats.conf:ro
+      - nats-data:/data/jetstream
+    ports:
+      - "127.0.0.1:4222:4222"
+      - "127.0.0.1:8222:8222"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8222/healthz"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+
+  decision-worker:
+    build: .
+    command: ["node", "services/decision-worker.mjs"]
+    environment:
+      NATS_URL: nats://nats:4222
+    depends_on:
+      nats:
+        condition: service_healthy
+    restart: unless-stopped
+
+  aggregator:
+    build: .
+    command: ["node", "services/aggregator.mjs"]
+    environment:
+      NATS_URL: nats://nats:4222
+    depends_on:
+      nats:
+        condition: service_healthy
+    restart: unless-stopped
+
+  ingestor:
+    build: .
+    command: ["node", "services/ingestor.mjs"]
+    environment:
+      NATS_URL: nats://nats:4222
+      SYNTHETIC_ONLY: ${SYNTHETIC_ONLY:-1}
+      INGEST_SETTLE_MS: 2500
+    depends_on:
+      nats:
+        condition: service_healthy
+      decision-worker:
+        condition: service_started
+      aggregator:
+        condition: service_started
+    restart: "no"
+
+volumes:
+  nats-data:

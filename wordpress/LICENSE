@@ -1,0 +1,8 @@
+The WordPress plugin (plugin/cll-earthquake-lab) and theme (theme/cll-assurance-lab)
+are Copyright 2026 CryptoLiveLeak, Inc. and licensed under the GNU General Public
+License, version 2 or (at your option) any later version, consistent with WordPress
+extension licensing: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+
+The packaged plugin bundles the reviewer dashboard from ../public, which is licensed
+Apache-2.0. Apache-2.0 is compatible with GPL version 3, so the combined plugin package
+is distributed under GPL-3.0-or-later terms.

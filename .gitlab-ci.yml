@@ -1,0 +1,116 @@
+# GitLab equivalent of .github/workflows/ci.yml.
+stages: [build, analyze, test, evidence, package]
+
+variables:
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+  NATS_URL: "nats://nats:4222"
+
+default:
+  image: node:22-bookworm
+  cache:
+    key: npm
+    paths: [.npm/]
+
+.toolchain: &toolchain
+  - apt-get update -qq
+  # libclang-rt-dev provides the profiling runtime; without it LLVM coverage fails to link.
+  - apt-get install -y -qq --no-install-recommends clang llvm libclang-rt-14-dev clang-tidy cppcheck python3-pip zip php-cli >/dev/null
+
+build:
+  stage: build
+  script:
+    - *toolchain
+    - npm ci
+    - npm run build
+  artifacts:
+    paths: [build/alert_decision]
+    expire_in: 30 days
+
+static_analysis:
+  stage: analyze
+  needs: []
+  script:
+    - *toolchain
+    - mkdir -p reports
+    - clang-tidy --warnings-as-errors='*' cpp/alert_decision.cpp -- -std=c++20 | tee reports/clang-tidy.txt
+    - cppcheck --enable=warning,style,performance,portability --error-exitcode=1 cpp 2>&1 | tee reports/cppcheck.txt
+    - pip install --quiet --break-system-packages lizard multimetric
+    - python3 scripts/code_metrics.py
+    - npm ci && npm run sbom && npm audit --omit dev --audit-level=moderate
+  artifacts:
+    when: always
+    paths: [reports/]
+    expire_in: 1 year
+
+unit_tests:
+  stage: test
+  needs: [build]
+  script:
+    - *toolchain
+    - npm ci
+    - node --test --test-reporter=junit --test-reporter-destination=test-results.xml tests/*.test.mjs
+    - npm run test:sanitized
+    - npm run coverage:cpp
+  artifacts:
+    when: always
+    reports:
+      junit: test-results.xml
+    paths: [test-results.xml, reports/]
+    expire_in: 1 year
+
+integration:
+  stage: test
+  needs: [build]
+  services:
+    - name: nats:2.10.22-alpine
+      alias: nats
+      command: ["-js"]
+  script:
+    - npm ci
+    - npm run verify:integration
+    - npm run verify:transport
+  artifacts:
+    when: always
+    paths: [public/data/integration-evidence.json, public/data/transport-evidence.json]
+    expire_in: 1 year
+
+ansible_lint:
+  stage: analyze
+  needs: []
+  image: python:3.12-slim
+  script:
+    - pip install --quiet ansible-core ansible-lint
+    - ansible-playbook -i ansible/inventory.ini ansible/site.yml --syntax-check
+    - ansible-lint --profile production ansible/
+
+assurance_evidence:
+  stage: evidence
+  needs: [build, unit_tests, static_analysis, integration]
+  script:
+    - npm ci
+    - npm run assure
+  artifacts:
+    paths: [public/data/assurance-report.json]
+    expire_in: 1 year
+
+wordpress_package:
+  stage: package
+  needs: [assurance_evidence, integration]
+  script:
+    - *toolchain
+    - npm run lint:php
+    - npm run package:wordpress
+  artifacts:
+    paths: [dist/]
+    expire_in: 1 year
+
+pages:
+  stage: package
+  needs: [assurance_evidence, integration]
+  script:
+    - test -f public/index.html
+    - test -f public/data/assurance-report.json
+  artifacts:
+    paths: [public]
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'

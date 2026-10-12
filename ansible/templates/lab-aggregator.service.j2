@@ -1,0 +1,19 @@
+[Unit]
+Description=Earthquake Assurance Lab - aggregator
+After=lab-nats.service
+Requires=lab-nats.service
+
+[Service]
+User={{ lab_user }}
+WorkingDirectory={{ lab_home }}/app
+Environment=NATS_URL=nats://127.0.0.1:4222
+ExecStart=/usr/bin/node services/aggregator.mjs
+Restart=on-failure
+KillSignal=SIGTERM
+TimeoutStopSec=15
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths={{ lab_home }}
+
+[Install]
+WantedBy=multi-user.target

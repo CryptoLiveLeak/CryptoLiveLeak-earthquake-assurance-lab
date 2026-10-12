@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Independent software-assurance reference implementation by CryptoLiveLeak, Inc. using public and synthetic earthquake data. Not affiliated with or endorsed by USGS.">
+  <title>Earthquake Assurance Lab | CryptoLiveLeak, Inc.</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="brand">CryptoLiveLeak, Inc.</p>
+      <h1>Earthquake Assurance Lab</h1>
+    </div>
+    <div class="header-status" aria-label="Lab status">
+      <span class="status-dot" aria-hidden="true"></span>
+      <span>Reference implementation</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="disclaimer" aria-label="Important disclaimer">
+      Independent reference implementation using public and synthetic data. Not affiliated with or endorsed by USGS. Not deployed for public warning or life-safety decisions.
+    </section>
+
+    <section class="workspace" aria-labelledby="monitor-heading">
+      <div class="workspace-heading">
+        <div>
+          <p class="eyebrow">Browser simulation</p>
+          <h2 id="monitor-heading">Event monitor and decision trace</h2>
+        </div>
+        <div class="segmented" role="group" aria-label="Event source">
+          <button class="segment" data-mode="live" type="button" aria-pressed="false">USGS catalog</button>
+          <button class="segment active" data-mode="synthetic" type="button" aria-pressed="true">Synthetic</button>
+        </div>
+      </div>
+
+      <div class="metrics" aria-label="Current lab metrics">
+        <div class="metric"><span>Feed state</span><strong id="feed-state">Loading</strong></div>
+        <div class="metric"><span>Events</span><strong id="event-count">0</strong></div>
+        <div class="metric"><span>Candidate decisions</span><strong id="candidate-count">0</strong></div>
+        <div class="metric"><span>Evidence tests</span><strong id="test-count">Loading</strong></div>
+      </div>
+
+      <div class="monitor-grid">
+        <div class="event-list-wrap">
+          <div class="panel-heading">
+            <h3>Normalized events</h3>
+            <button id="refresh-feed" type="button">Refresh feed</button>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>Event</th><th>Magnitude</th><th>Age</th><th>Demo quality</th><th>Decision</th></tr></thead>
+              <tbody id="event-rows"><tr><td colspan="5" class="empty">Loading synthetic events...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="trace-panel" aria-labelledby="trace-heading">
+          <div class="panel-heading"><h3 id="trace-heading">Selected trace</h3></div>
+          <dl id="trace-details" class="trace-details">
+            <div><dt>Event</dt><dd>No event selected</dd></div>
+          </dl>
+          <div class="reason-box">
+            <span>Reason code</span>
+            <strong id="reason-code">waiting_for_event</strong>
+          </div>
+        </aside>
+      </div>
+      <p class="context-note" id="monitor-note">USGS catalog events are published observations, not early warnings. Most are older than the demonstration policy&rsquo;s two-minute freshness window, so they are suppressed with the reason code <code>stale_event</code> by design. Quality values and thresholds are illustrative. Browser tests do not run the C++ engine or the NATS broker.</p>
+    </section>
+
+    <section class="fault-band" aria-labelledby="fault-heading">
+      <div>
+        <p class="eyebrow">Controlled adverse conditions</p>
+        <h2 id="fault-heading">Fault injection</h2>
+      </div>
+      <div class="fault-controls">
+        <button type="button" data-fault="duplicate">Duplicate event</button>
+        <button type="button" data-fault="stale">Stale event</button>
+        <button type="button" data-fault="malformed">Malformed payload</button>
+        <button type="button" data-fault="out-of-order">Out-of-order revision</button>
+        <button type="button" id="mutation-check" class="mutation">Mutation check</button>
+      </div>
+      <output id="fault-output" class="fault-output" aria-live="polite">No fault scenario executed in this browser session.</output>
+    </section>
+
+    <section class="architecture" aria-labelledby="architecture-heading">
+      <div class="section-heading">
+        <p class="eyebrow">Local / CI stack, separate from this browser</p>
+        <h2 id="architecture-heading">Assurance architecture</h2>
+      </div>
+      <div class="flow" aria-label="System data flow">
+        <div class="flow-node"><span>01</span><strong>Ingest</strong><small>USGS public or synthetic events</small></div>
+        <div class="flow-arrow" aria-hidden="true">-&gt;</div>
+        <div class="flow-node"><span>02</span><strong>Persist</strong><small>NATS JetStream and replay</small></div>
+        <div class="flow-arrow" aria-hidden="true">-&gt;</div>
+        <div class="flow-node"><span>03</span><strong>Decide</strong><small>Bounded C++ component</small></div>
+        <div class="flow-arrow" aria-hidden="true">-&gt;</div>
+        <div class="flow-node"><span>04</span><strong>Aggregate</strong><small>Ordering and deduplication</small></div>
+        <div class="flow-arrow" aria-hidden="true">-&gt;</div>
+        <div class="flow-node"><span>05</span><strong>Evidence</strong><small>Reports, CI artifacts, trace</small></div>
+      </div>
+    </section>
+
+    <section class="evidence" aria-labelledby="evidence-heading">
+      <div class="section-heading evidence-heading">
+        <div>
+          <p class="eyebrow">Recorded test runs</p>
+          <h2 id="evidence-heading">Assurance evidence</h2>
+        </div>
+        <span id="evidence-state" class="evidence-state">Loading report</span>
+      </div>
+      <div class="evidence-grid">
+        <div><span>Scenarios passed</span><strong id="evidence-passed">-</strong></div>
+        <div><span>Failures</span><strong id="evidence-failed">-</strong></div>
+        <div><span>P95 process round trip</span><strong id="evidence-latency">-</strong></div>
+        <div><span>Release</span><strong id="evidence-release">-</strong></div>
+        <div><span>JetStream messages</span><strong id="transport-messages">-</strong></div>
+        <div><span>Durable consumers</span><strong id="transport-consumers">-</strong></div>
+        <div><span>Dedupe proof</span><strong id="transport-dedupe">-</strong></div>
+        <div><span>Simulated alert path</span><strong id="transport-alert">-</strong></div>
+      </div>
+      <div class="evidence-dates"><p>C++ report: <time id="evidence-date">-</time></p><p>NATS report: <time id="transport-date">-</time></p></div>
+      <p class="context-note">Process timings include executable startup and are not a real-time latency guarantee. Transport evidence is a separate dated run. Hashes are integrity checks, not digital signatures.</p>
+      <div class="hash-line"><span>Evidence hash</span><code id="evidence-hash">-</code></div>
+      <div class="hash-line"><span>Transport evidence hash</span><code id="transport-hash">-</code></div>
+      <div class="integration">
+        <div class="integration-heading"><h3>Fault-injection integration run</h3><span id="integration-summary">-</span></div>
+        <p class="context-note">Worker and aggregator run against a real NATS JetStream server while the harness injects malformed, duplicate, out-of-order, poison, future-dated, restart, and scale-out conditions. Run: <time id="integration-date">-</time>.</p>
+        <ul id="integration-list" class="integration-list"></ul>
+        <div class="hash-line"><span>Integration evidence hash</span><code id="integration-hash">-</code></div>
+      </div>
+      <nav class="report-links" aria-label="Evidence downloads"><a href="data/assurance-report.json" download>C++ report (JSON)</a><a href="data/transport-evidence.json" download>NATS report (JSON)</a><a href="data/integration-evidence.json" download>Integration report (JSON)</a><a id="link-repository" href="#" target="_blank" rel="noopener" hidden>Source repository</a><a id="link-pipeline" href="#" target="_blank" rel="noopener" hidden>CI pipeline runs</a></nav>
+    </section>
+
+    <section class="mapping" aria-labelledby="mapping-heading">
+      <div class="section-heading">
+        <p class="eyebrow">What this lab does and does not show</p>
+        <h2 id="mapping-heading">Demonstration scope</h2>
+      </div>
+      <div class="mapping-grid">
+        <div><strong>Implemented</strong><span>Bounded C++ inputs, deterministic test cases, a browser policy checked against C++, and executed browser fault scenarios.</span></div>
+        <div><strong>Recorded transport run</strong><span>Bounded redelivery with dead-lettering, revision ordering, graceful restart resume, and queue-group scale-out are exercised against a real broker. Hard-crash (SIGKILL) recovery, sustained load, and latency are not yet measured.</span></div>
+        <div><strong>Pipeline configuration</strong><span>Build, static analysis, sanitizers, unit and integration tests, coverage, code metrics, SBOM, Ansible lint, and packaging run in CI. Pipeline runs are linked in the evidence section.</span></div>
+        <div><strong>Source and verification</strong><span id="source-status">Public source repository and hosted pipeline links appear here once published. Until then, treat the release identifier above as an internal reference.</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>CryptoLiveLeak, Inc. | UEI EN2ZSMQ19AL4 | CAGE 1ZQ48</span>
+    <span>Simulation only. No public alerts are generated.</span>
+  </footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

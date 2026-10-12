@@ -1,0 +1,59 @@
+{
+  "generatedAt": "2026-09-23T00:23:30.650Z",
+  "stream": {
+    "name": "LAB",
+    "subjects": [
+      "lab.>"
+    ],
+    "storedMessages": 7,
+    "maxMessages": 100000,
+    "maxBytes": 536870912,
+    "duplicateWindowNanos": 120000000000
+  },
+  "consumers": [
+    {
+      "name": "decision-worker-v1",
+      "ackPolicy": "explicit",
+      "ackWaitNanos": 5000000000,
+      "maxDeliver": 3,
+      "maxAckPending": 64,
+      "deliveredStreamSequence": 2,
+      "acknowledgedStreamSequence": 2
+    },
+    {
+      "name": "aggregator-v1",
+      "ackPolicy": "explicit",
+      "ackWaitNanos": 5000000000,
+      "maxDeliver": 3,
+      "maxAckPending": 64,
+      "deliveredStreamSequence": 5,
+      "acknowledgedStreamSequence": 5
+    }
+  ],
+  "deduplication": {
+    "firstDuplicate": false,
+    "secondDuplicate": true,
+    "stream": "LAB",
+    "sequence": 7
+  },
+  "simulatedAlert": {
+    "schemaVersion": 1,
+    "eventId": "synthetic-candidate-001",
+    "eventKey": "4fe79c3f50faf110719bdb2cbe460d9deb7deef78aa0de537c6c1ac207b7c486",
+    "sourceRevision": 1790122936872,
+    "decidedAt": "2026-09-23T00:22:16.933Z",
+    "candidate": true,
+    "reason": "test_threshold_met",
+    "score": 4.914,
+    "simulationOnly": true,
+    "publishedAt": "2026-09-23T00:22:16.939Z"
+  },
+  "checks": {
+    "streamBounded": true,
+    "durableConsumers": true,
+    "boundedRedelivery": true,
+    "deterministicDeduplication": true,
+    "simulatedAlertPublished": true
+  },
+  "evidenceHash": "e0dbbf7053cd6c31c8b1b19b6fca75a050f1a9a95e2dec04a945f86c02e16368"
+}

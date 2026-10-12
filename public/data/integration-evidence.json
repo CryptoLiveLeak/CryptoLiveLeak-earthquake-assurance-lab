@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-12T14:27:34.246Z",
+  "release": "source-export",
+  "provenance": {
+    "commit": "source-export",
+    "workingTreeDirty": null,
+    "sourceSha256": "0a21318a714e081a7f405d167e61efb02fe784cfe67e3181aa6beb69e64d1af7",
+    "digitallySigned": false
+  },
+  "scope": "Fault-injection integration run against a single local NATS JetStream server. Not a load, latency, or availability test.",
+  "natsServer": "2.10.22",
+  "scenarios": [
+    {
+      "name": "end_to_end_candidate",
+      "finding": null,
+      "description": "A valid candidate event flows ingest -> C++ decision -> aggregator -> simulated alert.",
+      "passed": true,
+      "observed": {
+        "alerts": 1,
+        "reason": "test_threshold_met",
+        "simulationOnly": true
+      },
+      "durationMs": 114
+    },
+    {
+      "name": "fail_closed_ingestion",
+      "finding": "CLL-001",
+      "description": "Features with null magnitude, null depth, or no event time are rejected at ingestion instead of being coerced.",
+      "passed": true,
+      "observed": {
+        "rejected": [
+          "missing_magnitude",
+          "missing_depth",
+          "missing_event_time"
+        ]
+      },
+      "durationMs": 0
+    },
+    {
+      "name": "invalid_event_dead_lettered",
+      "finding": "CLL-001",
+      "description": "An event that bypasses the ingestor with a null depth is dead-lettered by the worker and never decided.",
+      "passed": true,
+      "observed": {
+        "deadLetterReason": "invalid_event",
+        "detail": "invalid_depthKm",
+        "decisions": 0
+      },
+      "durationMs": 615
+    },
+    {
+      "name": "poison_message_bounded_redelivery",
+      "finding": "CLL-004",
+      "description": "An undecodable message is retried exactly 3 times, then dead-lettered (previously dropped silently).",
+      "passed": true,
+      "observed": {
+        "attempts": 3,
+        "deadLetterReason": "max_deliveries_exhausted",
+        "payloadPreserved": true
+      },
+      "durationMs": 2098
+    },
+    {
+      "name": "revision_zero_replay",
+      "finding": "CLL-002",
+      "description": "A revision-0 decision replayed with a new message ID (as after the dedupe window) yields one alert, not two.",
+      "passed": true,
+      "observed": {
+        "alerts": 1,
+        "secondDelivery": "duplicate_revision"
+      },
+      "durationMs": 1617
+    },
+    {
+      "name": "out_of_order_revision",
+      "finding": null,
+      "description": "An older revision arriving after a newer one is suppressed.",
+      "passed": true,
+      "observed": {
+        "alerts": 1,
+        "keptRevision": 10,
+        "rejected": "out_of_order_revision"
+      },
+      "durationMs": 1620
+    },
+    {
+      "name": "future_timestamp_rejected",
+      "finding": "CLL-001",
+      "description": "An event timestamped 60 s in the future is rejected as out of range instead of clamped to zero age.",
+      "passed": true,
+      "observed": {
+        "reason": "input_out_of_range"
+      },
+      "durationMs": 120
+    },
+    {
+      "name": "worker_restart_resumes",
+      "finding": null,
+      "description": "With the worker stopped (graceful drain), a published event waits in the durable consumer and is processed after restart.",
+      "passed": true,
+      "observed": {
+        "decidedWhileStopped": 0,
+        "alertsAfterRestart": 1
+      },
+      "durationMs": 1234
+    },
+    {
+      "name": "queue_group_scale_out",
+      "finding": "CLL-005",
+      "description": "Two worker replicas share one durable consumer and each of 20 events is decided exactly once (previously a second replica crashed at startup with \"duplicate subscription\").",
+      "passed": true,
+      "observed": {
+        "events": 20,
+        "executionsWorkerA": 12,
+        "executionsWorkerB": 8
+      },
+      "durationMs": 1949
+    }
+  ],
+  "stream": {
+    "messages": 78
+  },
+  "summary": {
+    "total": 9,
+    "passed": 9,
+    "failed": 0,
+    "evidenceHash": "3740ae9a90a33e33965c1babd503f5dc4e8caa53bac51aeed85605852ad2ba38"
+  }
+}

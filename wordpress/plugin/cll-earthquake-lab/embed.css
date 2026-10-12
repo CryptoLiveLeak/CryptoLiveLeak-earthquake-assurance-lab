@@ -1,0 +1,4 @@
+.cll-earthquake-lab-embed { width: 100%; max-width: 100%; }
+.cll-earthquake-lab-frame { display: block; width: 100%; min-height: 700px; height: 1800px; border: 0; background: #f7f8fa; }
+.cll-lab-direct { margin: 12px 0; font-size: 14px; }
+@media (max-width: 620px) { .cll-earthquake-lab-frame { height: 4200px; } }

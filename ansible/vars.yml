@@ -1,0 +1,8 @@
+---
+lab_user: earthquake-lab
+lab_home: /srv/earthquake-lab
+lab_repo: https://github.com/CryptoLiveLeak/cryptoliveleak-earthquake-assurance-lab.git
+lab_version: main
+nats_version: 2.10.22
+# SHA-256 of nats-server-v2.10.22-linux-amd64.tar.gz; update together with nats_version.
+nats_sha256: db0b3ccbe4cbdd3872ae7486ec4f6b0f85824632a0789f4da2e0a8518390483e
