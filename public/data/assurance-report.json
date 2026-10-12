@@ -1,15 +1,15 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-12T14:25:43.142Z",
-  "release": "source-export",
+  "generatedAt": "2026-10-12T14:31:29.621Z",
+  "release": "faf527b26314087eec5b9a8221ed4d533be11d0b",
   "provenance": {
-    "commit": "source-export",
-    "workingTreeDirty": null,
-    "sourceSha256": "2cbedee01f545c97a0e9773666b529429de48abfa138f40385650912de49a127",
+    "commit": "faf527b26314087eec5b9a8221ed4d533be11d0b",
+    "workingTreeDirty": false,
+    "sourceSha256": "b2573316b460c01efe59955a066c7fa6e2c2c0de7318c255386aab5c4a88ad19",
     "inputs": [
       [
         ".gitlab-ci.yml",
-        "9571a271b20d40edbcf867ded8c186b6dab545144ede4e30f0bab559936e44b8"
+        "09425343e7cbb86426fb34e93a63516c6e1a56056d695b5f9406fa8c98501b06"
       ],
       [
         "cpp/alert_decision.cpp",
@@ -17,23 +17,27 @@
       ],
       [
         "docs/ARCHITECTURE.md",
-        "54b976d8633cafbc0fee217801b34bd2426be5b43bdfb2c5d62b16e3cb1f61ee"
+        "1e78d060fb25b50f8b2094d458272e5069822680fe55cd907cb0a887e11a083c"
       ],
       [
         "docs/CLAIMS-BOUNDARY.md",
-        "d7926a037fa7e90036cc7fead53e340eca84b1ae2f2ad5b4c3fcfc6d46ea0c37"
+        "055da9145caa118872ee1311a1446be8716ae841b5f366ca98a02dae9c2da773"
+      ],
+      [
+        "docs/FINDINGS.md",
+        "bf125a0d13bdd937d47ca399a21105fc28d2dab3e08423544d11c404743779d5"
       ],
       [
         "docs/MESSAGE-CONTRACTS.md",
-        "b6897480557d2b6a0288bae21921420c81cb6a5d24003704240b2f7f3b0271bd"
+        "e90e0ed8787b37ade66cc4b78052f77214c3ea9c5f76f640b554af76dd3d3428"
       ],
       [
         "docs/REQUIREMENTS-TRACEABILITY.md",
-        "53f25627ec7ee42db5dd9f5412683787cdb3e22efe73f1c0f17524a4fc5aab20"
+        "7d859aafdfc28507fe29d9564a702629e7139060a313a957fef1e7cc0b418bda"
       ],
       [
         "docs/WORDPRESS-DEPLOYMENT.md",
-        "79727296437c6d217bcdf2448d61b18328d8e480b9ef9cdb709942d563da04c7"
+        "9fef432f1d2e13e9181d26c82d2f375305f30a3702979ac01a05f0ddd43b4751"
       ],
       [
         "nats/nats.conf",
@@ -41,15 +45,15 @@
       ],
       [
         "package-lock.json",
-        "464e69e78fe7960c45e0907bc721e784a170f6ce21721ad354f7d9d14f79d19c"
+        "97adb9ce25b890bb601bf12a5a3ecfe87614f066dc97f33bd7cab9047494df3a"
       ],
       [
         "package.json",
-        "e2d03282979359a2d9f2817127edb2d3f234bc81a14fa2d255edc5c57b2de313"
+        "fcd32e2375d188a1ed6ad08991ba46b2802f16d41c602adf2b8af89683f8e9ad"
       ],
       [
         "public/app.js",
-        "7c7032db1d12bf0e8f60c45b5421f2a760056ace21bc91ad506917d599dd34d2"
+        "e2eda1f61a75eaebeeb1bbf795b38d015568623f56bed18ea811e07b001d4fb2"
       ],
       [
         "public/decision-model.js",
@@ -57,15 +61,27 @@
       ],
       [
         "public/index.html",
-        "7d0c23b82142bcb491393ad7581aeab6aa36a7498442cec7aaf34c68969fb72e"
+        "5b96236d863fda65e5b827e2c9b096af692223be92c4e2c41c6165ed993fc181"
       ],
       [
         "public/styles.css",
-        "c5ddb57c91a00d88e4fd7a8c6a77f3222fd7e0b759a4ad2d592e0556eadba9de"
+        "e20d0bd50efebafb0aa116292d3df0f5cf6fe35e948b76106cf369ace8912849"
+      ],
+      [
+        "scripts/code_metrics.py",
+        "bbfae03c37a6a418e10d22efc5803e057861f52206956da09b46c38b2ab51352"
       ],
       [
         "scripts/coverage.mjs",
         "8ca46c7ad808d084b26322cb6a1453117cda065e39b696a432208abff4247528"
+      ],
+      [
+        "scripts/lint-php.sh",
+        "59213856238f0878231a2e9c1d1ed711b950b862c4c91565cbbd16dfc814549c"
+      ],
+      [
+        "scripts/package-wordpress.sh",
+        "84446ed1e1432785b166758f238703e08630c8d90c98e9e18314b62aadc934de"
       ],
       [
         "scripts/provenance.mjs",
@@ -147,49 +163,49 @@
       "passed": true,
       "expected": "test_threshold_met",
       "observed": "test_threshold_met",
-      "latencyMicros": 5860
+      "latencyMicros": 8449
     },
     {
       "name": "below_threshold",
       "passed": true,
       "expected": "below_test_threshold",
       "observed": "below_test_threshold",
-      "latencyMicros": 3778
+      "latencyMicros": 5414
     },
     {
       "name": "stale_event",
       "passed": true,
       "expected": "stale_event",
       "observed": "stale_event",
-      "latencyMicros": 3645
+      "latencyMicros": 5877
     },
     {
       "name": "low_quality",
       "passed": true,
       "expected": "insufficient_quality",
       "observed": "insufficient_quality",
-      "latencyMicros": 4097
+      "latencyMicros": 6433
     },
     {
       "name": "invalid_latitude",
       "passed": true,
       "expected": "input_out_of_range",
       "observed": "input_out_of_range",
-      "latencyMicros": 3936
+      "latencyMicros": 6293
     },
     {
       "name": "invalid_depth",
       "passed": true,
       "expected": "input_out_of_range",
       "observed": "input_out_of_range",
-      "latencyMicros": 3524
+      "latencyMicros": 6025
     }
   ],
   "summary": {
     "total": 6,
     "passed": 6,
     "failed": 0,
-    "p95LatencyMicros": 5860,
+    "p95LatencyMicros": 8449,
     "evidenceHash": "872e65f6bfe2115a361c8f5df8111923726649de4ed66de201bc842bf043f236"
   }
 }

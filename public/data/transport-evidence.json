@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-12T14:27:39.387Z",
+  "generatedAt": "2026-10-12T14:31:44.709Z",
   "stream": {
     "name": "LAB",
     "subjects": [
@@ -17,8 +17,8 @@
       "ackWaitNanos": 5000000000,
       "maxDeliver": 3,
       "maxAckPending": 64,
-      "deliveredStreamSequence": 46,
-      "acknowledgedStreamSequence": 46
+      "deliveredStreamSequence": 40,
+      "acknowledgedStreamSequence": 40
     },
     {
       "name": "aggregator-v1",
@@ -38,15 +38,15 @@
   },
   "simulatedAlert": {
     "schemaVersion": 1,
-    "eventId": "it-scale-18",
-    "eventKey": "47bfae114293abce5733ebeb31533da17e5a33a2621dbdef795deba176b12bc5",
-    "sourceRevision": 1791815252994,
-    "decidedAt": "2026-10-12T14:27:33.106Z",
+    "eventId": "it-scale-19",
+    "eventKey": "e3fc1ebd19dbe5bf8e9e1ff1b04ca1dff328da6cb17dd50ac16777027e84c583",
+    "sourceRevision": 1791815498338,
+    "decidedAt": "2026-10-12T14:31:38.476Z",
     "candidate": true,
     "reason": "test_threshold_met",
-    "score": 5.227,
+    "score": 5.226,
     "simulationOnly": true,
-    "publishedAt": "2026-10-12T14:27:33.107Z"
+    "publishedAt": "2026-10-12T14:31:38.477Z"
   },
   "checks": {
     "streamBounded": true,
@@ -55,5 +55,5 @@
     "deterministicDeduplication": true,
     "simulatedAlertPublished": true
   },
-  "evidenceHash": "08d65bf674693cfb1198262420113b6129c3b1f7b7e3e62778895d72dfca8b9f"
+  "evidenceHash": "20147b02e5c1ee2df8b4ef239b688f1698c7bcd9dcbfdded7c1bbfb326306220"
 }

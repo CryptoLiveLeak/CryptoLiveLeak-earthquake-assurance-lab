@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-12T14:27:34.246Z",
-  "release": "source-export",
+  "generatedAt": "2026-10-12T14:31:39.606Z",
+  "release": "faf527b26314087eec5b9a8221ed4d533be11d0b",
   "provenance": {
-    "commit": "source-export",
-    "workingTreeDirty": null,
-    "sourceSha256": "0a21318a714e081a7f405d167e61efb02fe784cfe67e3181aa6beb69e64d1af7",
+    "commit": "faf527b26314087eec5b9a8221ed4d533be11d0b",
+    "workingTreeDirty": false,
+    "sourceSha256": "b2573316b460c01efe59955a066c7fa6e2c2c0de7318c255386aab5c4a88ad19",
     "digitallySigned": false
   },
   "scope": "Fault-injection integration run against a single local NATS JetStream server. Not a load, latency, or availability test.",
@@ -21,7 +21,7 @@
         "reason": "test_threshold_met",
         "simulationOnly": true
       },
-      "durationMs": 114
+      "durationMs": 115
     },
     {
       "name": "fail_closed_ingestion",
@@ -47,7 +47,7 @@
         "detail": "invalid_depthKm",
         "decisions": 0
       },
-      "durationMs": 615
+      "durationMs": 618
     },
     {
       "name": "poison_message_bounded_redelivery",
@@ -59,7 +59,7 @@
         "deadLetterReason": "max_deliveries_exhausted",
         "payloadPreserved": true
       },
-      "durationMs": 2098
+      "durationMs": 2097
     },
     {
       "name": "revision_zero_replay",
@@ -70,7 +70,7 @@
         "alerts": 1,
         "secondDelivery": "duplicate_revision"
       },
-      "durationMs": 1617
+      "durationMs": 1616
     },
     {
       "name": "out_of_order_revision",
@@ -82,7 +82,7 @@
         "keptRevision": 10,
         "rejected": "out_of_order_revision"
       },
-      "durationMs": 1620
+      "durationMs": 1624
     },
     {
       "name": "future_timestamp_rejected",
@@ -92,7 +92,7 @@
       "observed": {
         "reason": "input_out_of_range"
       },
-      "durationMs": 120
+      "durationMs": 132
     },
     {
       "name": "worker_restart_resumes",
@@ -103,7 +103,7 @@
         "decidedWhileStopped": 0,
         "alertsAfterRestart": 1
       },
-      "durationMs": 1234
+      "durationMs": 1232
     },
     {
       "name": "queue_group_scale_out",
@@ -112,10 +112,10 @@
       "passed": true,
       "observed": {
         "events": 20,
-        "executionsWorkerA": 12,
-        "executionsWorkerB": 8
+        "executionsWorkerA": 6,
+        "executionsWorkerB": 14
       },
-      "durationMs": 1949
+      "durationMs": 1924
     }
   ],
   "stream": {
