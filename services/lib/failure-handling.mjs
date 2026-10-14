@@ -6,6 +6,7 @@ import { MAX_DELIVER } from "../nats-client.mjs";
 export const DEAD_LETTER_PREFIX = "lab.deadletter";
 export const RETRY_DELAY_MS = 1_000;
 
+/** Subject that holds a consumer's dead-letter records. */
 export function deadLetterSubject(consumer) {
   return `${DEAD_LETTER_PREFIX}.${consumer}`;
 }
@@ -58,6 +59,7 @@ export function log(record) {
 /** Drain on SIGTERM/SIGINT so in-flight messages are acked or returned (FINDING CLL-007). */
 export function drainOnSignal(connection, name) {
   let draining = false;
+  // Drain once, on the first signal; later signals are ignored while draining.
   const stop = async (signal) => {
     if (draining) return;
     draining = true;

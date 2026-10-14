@@ -47,6 +47,7 @@ export function normalizeFeature(feature, { source = "USGS public GeoJSON feed",
   return { ok: true, event };
 }
 
+/** Deterministic idempotency key: SHA-256 of `eventId:sourceRevision`. */
 export function eventKeyFor(eventId, sourceRevision) {
   return createHash("sha256").update(`${eventId}:${sourceRevision}`).digest("hex");
 }

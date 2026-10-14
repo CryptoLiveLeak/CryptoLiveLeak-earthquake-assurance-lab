@@ -14,22 +14,23 @@ Status key:
 | Cyclomatic complexity | Lizard per function, with CI failing above 15 (see FINDINGS CLL-010) | Verified in CI |
 | Halstead metrics | multimetric volume, difficulty, effort, and maintainability index per file | Verified in CI |
 | Unit-test coverage | LLVM line, function, and branch coverage of the C++ component (100/100/100) | Verified in CI |
-| Documentation coverage | Message contracts, architecture, and findings docs; no automated doc-coverage measure | Partial |
-| Dependency analysis | CycloneDX SBOM (`npm sbom`) and `npm audit` gate | Verified in CI |
+| Documentation coverage | `scripts/doc_dependency_metrics.py`: share of production functions with a contract comment (32/32), CI floor 60% (CLL-012) | Verified in CI |
+| Dependency analysis | Module dependency graph with fan-in/fan-out and cycle detection (`reports/dependency-graph.{json,dot}`); CycloneDX SBOM and `npm audit` gate | Verified in CI |
 | Correctness and input ranges | C++ boundary tests, C++/JavaScript parity vectors, fail-closed contract (CLL-001) | Verified in CI |
 | Missing and out-of-order data | Contract rejection, revision gate, out-of-order and revision-0 scenarios (CLL-001, CLL-002) | Verified in CI |
-| Race conditions and memory safety | AddressSanitizer and UndefinedBehaviorSanitizer test run; clang-tidy and cppcheck clean. No ThreadSanitizer (the C++ component is single-threaded). | Partial |
+| Race conditions and memory safety | ASan/UBSan test run; clang-tidy CERT, bugprone, concurrency profile and cppcheck clean; hardened build flags (`-Wconversion`, stack protector, FORTIFY). ThreadSanitizer not applicable to the single-threaded component. | Verified in CI |
 | Real-time safety | Bounded inputs, 1-second engine timeout, non-blocking invocation (CLL-009). No latency benchmark or guarantee. | Partial |
 | Message interfaces | Versioned, validated contracts with dead-lettering (`docs/MESSAGE-CONTRACTS.md`) | Verified in CI |
-| Tunable parameters | Named constants in C++ and documented stream and consumer limits; no external configuration file with bounds checks | Partial |
+| Tunable parameters | Named constants in C++ (`kMaxAgeMs`, `kMinQuality`, …), documented stream/consumer limits, `REVISION_CAPACITY` and coverage floors as validated environment settings | Partial |
 | Failure propagation | Engine failure becomes a reason-coded decision; invalid or poison messages go to the dead-letter subject (CLL-004) | Verified in CI |
 | Logging | Structured JSON logs per service with state, reason, sequence, and delivery count | Demonstrated |
 | Timeouts, retries, backoff | 3-delivery cap with 1-second retry delay and dead-letter, verified against a real broker | Verified in CI |
 | Restart and recovery | Graceful-drain restart resume verified. Hard-crash (SIGKILL) recovery and stream replay not yet measured. | Partial |
 | Horizontal scaling | Queue-group scale-out, two replicas and exactly-once engine execution per event (CLL-005) | Verified in CI |
-| CI workflow | GitHub Actions and GitLab CI with equivalent build, analyze, test, evidence, and package stages | Verified in CI |
-| Automated static analysis | clang-tidy (warnings as errors), cppcheck, PHP lint | Verified in CI |
+| CI workflow | GitHub Actions and GitLab CI with equivalent build, analyze, test, evidence, and package stages; branch protection and release policy in `docs/CODING-STANDARD.md` §7 | Verified in CI |
+| Automated static analysis | clang-tidy CERT/bugprone/concurrency profile as errors (`.clang-tidy`), cppcheck, PHP lint; coverage shown on every GitLab MR with a configurable decline floor (`scripts/coverage-gate.mjs`) | Verified in CI |
 | Deployment reproducibility | Ansible playbook (pinned, checksum-verified NATS; systemd units; smoke test), ansible-lint production profile; Docker Compose | Verified in CI (lint and syntax); a playbook run on a host is a manual step |
 | Rollback | Tagged releases and versioned WordPress packages with SHA-256 manifests; no automated rollback exercise | Partial |
 | Post-deployment smoke test | Ansible `/healthz` check; WordPress HTTP checks are manual | Partial |
 | Scientific algorithms, uncertainty, alert pause | Out of scope: no agency source or scientific model is used | Not demonstrated |
+| Coding standard | `docs/CODING-STANDARD.md`: naming, file structure, error handling, documentation, review checklist, GitLab workflow; automated rules mapped to tools | Demonstrated |

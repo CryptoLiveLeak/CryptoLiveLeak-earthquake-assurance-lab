@@ -7,6 +7,7 @@
 // for an evicted event is treated as new. Capacity should exceed the number of events that
 // can be active within the stream's duplicate window and retention period.
 export class RevisionGate {
+  /** @param {number} capacity Maximum tracked events before least-recently-updated eviction. */
   constructor(capacity = 10_000) {
     if (!Number.isSafeInteger(capacity) || capacity < 1) throw new RangeError("capacity must be a positive integer");
     this.capacity = capacity;

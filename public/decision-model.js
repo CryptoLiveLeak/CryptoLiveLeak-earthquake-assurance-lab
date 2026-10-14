@@ -18,6 +18,7 @@ export function decisionFor(event, now = Date.now()) {
 
 export class RevisionGate {
   constructor(limit = 256) { this.limit = limit; this.revisions = new Map(); }
+  /** Read-only verdict for an (id, revision) pair; never mutates state. */
   check(id, revision) {
     if (typeof id !== "string" || !id || id.length > 200 || !Number.isSafeInteger(revision) || revision < 0) return "invalid_revision";
     const known = this.revisions.get(id);
@@ -25,6 +26,7 @@ export class RevisionGate {
     if (known === undefined && this.revisions.size >= this.limit) return "capacity_reached";
     return "accepted";
   }
+  /** Record a revision if accepted; returns the verdict. */
   commit(id, revision) {
     const reason = this.check(id, revision);
     if (reason === "accepted") this.revisions.set(id, revision);
@@ -51,6 +53,7 @@ export function runFaultScenario(type, now = Date.now(), decide = decisionFor) {
   return { type, input, expected, observed, passed: observed === expected, executedAt: new Date(now).toISOString(), scope: "browser-model-only" };
 }
 
+/** Convert a USGS GeoJSON feature into the browser event shape without coercing missing numbers. */
 export function normalizeFeature(feature) {
   const coordinates = feature.geometry?.coordinates || [];
   return {

@@ -13,12 +13,14 @@ const elements = {
   faultOutput: document.querySelector("#fault-output"),
 };
 
+// Human-readable age (seconds or minutes) for the event table.
 function timeAgo(timestamp) {
   const seconds = Math.max(0, Math.round((Date.now() - timestamp) / 1000));
   if (seconds < 60) return `${seconds}s`;
   return `${Math.round(seconds / 60)}m`;
 }
 
+// Four fixture events covering nominal, low-quality, stale, and below-threshold cases.
 function syntheticEvents() {
   const now = Date.now();
   return [
@@ -29,6 +31,7 @@ function syntheticEvents() {
   ];
 }
 
+// Re-render the event table and summary metrics from state.
 function render() {
   const decisions = state.events.map((event) => ({ event, decision: decisionFor(event) }));
   elements.eventCount.textContent = String(state.events.length);
@@ -47,6 +50,7 @@ function render() {
   }
 }
 
+// Show the decision trace for one event and highlight its row.
 function selectEvent(id) {
   state.selected = state.events.find((event) => event.id === id) || null;
   if (!state.selected) return;
@@ -65,10 +69,12 @@ function selectEvent(id) {
   render();
 }
 
+// Escape text for safe insertion into innerHTML.
 function escapeHtml(value) {
   return value.replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character]);
 }
 
+// Load synthetic fixtures, or the USGS catalog in catalog mode, with timeout and fallback to replay.
 async function loadEvents() {
   const requestId = ++state.requestId;
   state.controller?.abort();
@@ -119,6 +125,7 @@ function brokenPolicy(event, now = Date.now()) {
   return decisionFor({ ...event, observedAt: now - 1000 }, now);
 }
 
+// Run the stale-event scenario against a deliberately broken policy; the test must FAIL.
 function runMutationCheck() {
   const result = runFaultScenario("stale", Date.now(), brokenPolicy);
   elements.faultOutput.textContent = result.passed
@@ -126,6 +133,7 @@ function runMutationCheck() {
     : `PASS | Mutation detected: the stale-event test failed against a broken policy (expected=${result.expected}, observed=${result.observed}) | ${result.executedAt}`;
 }
 
+// Render the fault-injection integration report when present.
 async function loadIntegration() {
   try {
     const response = await fetch(new URL("./data/integration-evidence.json", import.meta.url), { cache: "no-store", signal: AbortSignal.timeout(8000) });

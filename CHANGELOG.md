@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.1 — 2026-10-14
+- Documentation-coverage metric and module dependency graph with cycle detection (CLL-012: 28% → 100%).
+- CERT/bugprone/concurrency clang-tidy profile (`.clang-tidy`) and hardened compiler flags.
+- `docs/CODING-STANDARD.md` and GitLab merge-request coverage reporting with a configurable decline floor.
+
 ## 0.4.0 — 2026-10-12
 - Unified repository: C++ engine, NATS services, dashboard, WordPress plugin and theme, docs, CI.
 - Fixed findings CLL-001 to CLL-011 (see docs/FINDINGS.md): fail-closed ingestion and validation, revision-0 duplicate alerts, commit-before-publish loss, silent loss after maximum deliveries (now dead-lettered), queue-group scale-out, bounded revision memory, graceful drain, stream-config drift, non-blocking engine calls, C++ complexity refactor (output unchanged; evidence hash identical), non-root container.

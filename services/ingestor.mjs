@@ -6,6 +6,7 @@ const FEED_URL = process.env.USGS_FEED_URL ||
   "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson";
 const synthetic = process.env.SYNTHETIC_ONLY !== "0"; // synthetic is the default; catalog is opt-in
 
+// Two deterministic fixture events: one candidate, one below threshold.
 function syntheticPayload() {
   const now = Date.now();
   return {

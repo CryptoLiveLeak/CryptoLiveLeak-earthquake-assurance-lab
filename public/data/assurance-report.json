@@ -1,19 +1,19 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-12T14:31:29.621Z",
-  "release": "faf527b26314087eec5b9a8221ed4d533be11d0b",
+  "generatedAt": "2026-10-14T12:17:57.524Z",
+  "release": "working-tree:ce453bbd3898a2fca812b88115504323cd35189c92de53610fe546b510cac0a0",
   "provenance": {
-    "commit": "faf527b26314087eec5b9a8221ed4d533be11d0b",
-    "workingTreeDirty": false,
-    "sourceSha256": "b2573316b460c01efe59955a066c7fa6e2c2c0de7318c255386aab5c4a88ad19",
+    "commit": "235d6fe20462317dd7d332050110d2e88ecb11e1",
+    "workingTreeDirty": true,
+    "sourceSha256": "ce453bbd3898a2fca812b88115504323cd35189c92de53610fe546b510cac0a0",
     "inputs": [
       [
         ".gitlab-ci.yml",
-        "09425343e7cbb86426fb34e93a63516c6e1a56056d695b5f9406fa8c98501b06"
+        "d3eae4230b68a53b8fc1b18b1e6811afd702b73b2be192ddfda7cf2c24287b0c"
       ],
       [
         "cpp/alert_decision.cpp",
-        "afb80c91016905540dc1276287dbef8740865ea14c8bb4dc523f555594e81784"
+        "0e51423fed464d53fd8858e41eb1c2a7e636e57141abd073d23ee762befb0633"
       ],
       [
         "docs/ARCHITECTURE.md",
@@ -24,8 +24,12 @@
         "055da9145caa118872ee1311a1446be8716ae841b5f366ca98a02dae9c2da773"
       ],
       [
+        "docs/CODING-STANDARD.md",
+        "559e6399d7a39db6629bf945d92d7407018a5fa8c73064916165af7f07a351a6"
+      ],
+      [
         "docs/FINDINGS.md",
-        "bf125a0d13bdd937d47ca399a21105fc28d2dab3e08423544d11c404743779d5"
+        "b9724453c72e48ba11f7033ed1f881306aae57292cc4b458acb82bbe95280bac"
       ],
       [
         "docs/MESSAGE-CONTRACTS.md",
@@ -33,7 +37,7 @@
       ],
       [
         "docs/REQUIREMENTS-TRACEABILITY.md",
-        "7d859aafdfc28507fe29d9564a702629e7139060a313a957fef1e7cc0b418bda"
+        "74200f7ba634c9abecb1b20d87203e92680c3e10da27effdfed95118a95f0bd9"
       ],
       [
         "docs/WORDPRESS-DEPLOYMENT.md",
@@ -49,15 +53,15 @@
       ],
       [
         "package.json",
-        "fcd32e2375d188a1ed6ad08991ba46b2802f16d41c602adf2b8af89683f8e9ad"
+        "86d80ef163b03c54036be80f17aef863777b7bcf92a866cce81306db4b2903b9"
       ],
       [
         "public/app.js",
-        "e2eda1f61a75eaebeeb1bbf795b38d015568623f56bed18ea811e07b001d4fb2"
+        "1fd8777d7b9a2bb90299f9bd54a2affbefb629e8a18b25789196de68a9e4bcec"
       ],
       [
         "public/decision-model.js",
-        "050b8c6c6c68e3b3ba787db5ce932ff0e4029da3e41672aeec889e246a382a3d"
+        "e5baa577d6b3c46c70ca7cef757fdd0cc7c8f2c1da3e5bec5933dcace54050f3"
       ],
       [
         "public/index.html",
@@ -72,8 +76,16 @@
         "bbfae03c37a6a418e10d22efc5803e057861f52206956da09b46c38b2ab51352"
       ],
       [
+        "scripts/coverage-gate.mjs",
+        "ab6c5e4e5640a969a55c51a949e207d380a47b8612a144b857a4a5ae5430f934"
+      ],
+      [
         "scripts/coverage.mjs",
         "8ca46c7ad808d084b26322cb6a1453117cda065e39b696a432208abff4247528"
+      ],
+      [
+        "scripts/doc_dependency_metrics.py",
+        "0b840075f31bb36b847d7e72aaa780ee7099efbd14af87859cf750e2d17aeef0"
       ],
       [
         "scripts/lint-php.sh",
@@ -109,23 +121,23 @@
       ],
       [
         "services/ingestor.mjs",
-        "932dad1a8569ce61c831e8df1a4ca1206a207e6495b735aea9db5e1e8c03907e"
+        "98b473d2f19d328552c13caf9325383364e9398454f56cf6ca280e3a4d38ceab"
       ],
       [
         "services/lib/event-contract.mjs",
-        "38010da11eb1caa7953df719823a32ab3c4194bd21d20a130f1eab045f104530"
+        "093af925cbd6d1fa939851d5eda3f01fb0acf7f571dee75e2c12c86eac5c4d64"
       ],
       [
         "services/lib/failure-handling.mjs",
-        "411d7647475e0e592e3400118d2084398b4b11d5dead95e0324f2227122a5e25"
+        "8bce977af26067d37b9ae570caf83ce631e9dfe5afb5d78cf3227f1ef2d05c42"
       ],
       [
         "services/lib/revision-gate.mjs",
-        "46dba54dee956ae15d7aae2ab59756bd5830df120576063afe16bff144979940"
+        "493e346ce1c34a663ce52c1376d12a83059fb6eb248f32dc9d891e8adeba9d24"
       ],
       [
         "services/nats-client.mjs",
-        "19bd2a706adf5f7fc62605346e46dd2ef4dcf6b570d2d875c69206c244923279"
+        "3422c18563b351c48d91fe70caea8582573c496e90d2d87f74d586e9b00b94cf"
       ],
       [
         "services/static-server.mjs",
@@ -163,49 +175,49 @@
       "passed": true,
       "expected": "test_threshold_met",
       "observed": "test_threshold_met",
-      "latencyMicros": 8449
+      "latencyMicros": 9889
     },
     {
       "name": "below_threshold",
       "passed": true,
       "expected": "below_test_threshold",
       "observed": "below_test_threshold",
-      "latencyMicros": 5414
+      "latencyMicros": 6064
     },
     {
       "name": "stale_event",
       "passed": true,
       "expected": "stale_event",
       "observed": "stale_event",
-      "latencyMicros": 5877
+      "latencyMicros": 5669
     },
     {
       "name": "low_quality",
       "passed": true,
       "expected": "insufficient_quality",
       "observed": "insufficient_quality",
-      "latencyMicros": 6433
+      "latencyMicros": 6370
     },
     {
       "name": "invalid_latitude",
       "passed": true,
       "expected": "input_out_of_range",
       "observed": "input_out_of_range",
-      "latencyMicros": 6293
+      "latencyMicros": 4925
     },
     {
       "name": "invalid_depth",
       "passed": true,
       "expected": "input_out_of_range",
       "observed": "input_out_of_range",
-      "latencyMicros": 6025
+      "latencyMicros": 3794
     }
   ],
   "summary": {
     "total": 6,
     "passed": 6,
     "failed": 0,
-    "p95LatencyMicros": 8449,
+    "p95LatencyMicros": 9889,
     "evidenceHash": "872e65f6bfe2115a361c8f5df8111923726649de4ed66de201bc842bf043f236"
   }
 }

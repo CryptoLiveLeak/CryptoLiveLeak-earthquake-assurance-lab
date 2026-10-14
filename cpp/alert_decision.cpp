@@ -34,6 +34,7 @@ constexpr double kMinQuality = 0.65;
 constexpr double kMinMagnitude = 4.5;
 constexpr double kMinScore = 3.2;
 
+// Parse one CLI argument as a finite double; throws invalid_argument on any trailing text, NaN, or infinity.
 double parse_number(const std::string& value, std::string_view name) {
   try {
     std::size_t consumed = 0;
@@ -49,12 +50,14 @@ double parse_number(const std::string& value, std::string_view name) {
 
 bool within(double value, double low, double high) { return value >= low && value <= high; }
 
+// True when every input lies within the documented demonstration ranges.
 bool in_range(const Inputs& in) {
   return within(in.magnitude, -2.0, 10.0) && within(in.quality, 0.0, 1.0) &&
          within(in.age_ms, 0.0, kMaxAgeMs) && within(in.latitude, -90.0, 90.0) &&
          within(in.longitude, -180.0, 180.0) && within(in.depth_km, -5.0, 800.0);
 }
 
+// Apply the demonstration policy: range check, freshness window, quality gate, then score threshold.
 Decision decide(const Inputs& in) {
   if (!in_range(in)) {
     return {false, "input_out_of_range", 0.0};
@@ -71,6 +74,7 @@ Decision decide(const Inputs& in) {
   return {candidate, candidate ? "test_threshold_met" : "below_test_threshold", score};
 }
 
+// Emit the decision as a single JSON line with a fixed three-decimal score.
 void print_result(const Decision& decision) {
   std::cout << std::boolalpha << R"({"candidate":)" << decision.candidate << R"(,"reason":")"
             << decision.reason << R"(","score":)" << std::fixed << std::setprecision(3)
@@ -79,6 +83,7 @@ void print_result(const Decision& decision) {
 
 }  // namespace
 
+// Entry point: six numeric arguments in, one JSON decision out. Exit 64 on usage error, 65 on malformed input.
 int main(int argc, char* argv[]) {
   if (argc != 7) {
     std::cerr << "usage: alert_decision magnitude quality age_ms latitude longitude depth_km\n";

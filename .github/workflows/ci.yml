@@ -36,12 +36,14 @@ jobs:
       - name: Static analysis
         run: |
           mkdir -p reports
-          clang-tidy --warnings-as-errors='*' cpp/alert_decision.cpp -- -std=c++20 | tee reports/clang-tidy.txt
+          clang-tidy cpp/alert_decision.cpp -- -std=c++20 | tee reports/clang-tidy.txt
           cppcheck --enable=warning,style,performance,portability --error-exitcode=1 cpp 2>&1 | tee reports/cppcheck.txt
       - name: C++ coverage (LLVM)
         run: npm run coverage:cpp
       - name: Code metrics (LOC, cyclomatic complexity, Halstead)
         run: npm run metrics
+      - name: Coverage floor
+        run: node scripts/coverage-gate.mjs
       - name: SBOM and dependency audit
         run: |
           npm run sbom

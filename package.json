@@ -1,11 +1,11 @@
 {
   "name": "cryptoliveleak-earthquake-assurance-lab",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "private": true,
   "type": "module",
   "description": "Independent software-assurance reference implementation: C++ decision component, NATS JetStream services, fault-injection integration tests, code metrics, and reviewer dashboard.",
   "scripts": {
-    "build": "mkdir -p build && clang++ -std=c++20 -O2 -Wall -Wextra -Wpedantic -Werror cpp/alert_decision.cpp -o build/alert_decision",
+    "build": "mkdir -p build && clang++ -std=c++20 -O2 -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion -Wshadow -Wformat=2 -Wcast-align -D_FORTIFY_SOURCE=2 -fstack-protector-strong cpp/alert_decision.cpp -o build/alert_decision",
     "test": "node --test tests/*.test.mjs",
     "assure": "node scripts/run-assurance.mjs",
     "verify:transport": "node scripts/verify-transport.mjs",
@@ -18,10 +18,11 @@
     "build:sanitized": "mkdir -p build && clang++ -std=c++20 -g -O1 -fsanitize=address,undefined -fno-omit-frame-pointer -fno-sanitize-recover=all cpp/alert_decision.cpp -o build/alert_decision_san",
     "test:sanitized": "npm run build:sanitized && DECISION_ENGINE=build/alert_decision_san node --test tests/decision_engine.test.mjs tests/browser_model.test.mjs",
     "verify:integration": "node scripts/verify-integration.mjs",
-    "metrics": "python3 scripts/code_metrics.py",
+    "metrics": "python3 scripts/code_metrics.py && python3 scripts/doc_dependency_metrics.py",
     "sbom": "mkdir -p reports && npm sbom --sbom-format cyclonedx --omit dev > reports/sbom.cdx.json",
     "package:wordpress": "sh scripts/package-wordpress.sh",
-    "lint:php": "sh scripts/lint-php.sh"
+    "lint:php": "sh scripts/lint-php.sh",
+    "lint:cpp": "clang-tidy cpp/alert_decision.cpp -- -std=c++20 && cppcheck --enable=warning,style,performance,portability --error-exitcode=1 cpp"
   },
   "dependencies": {
     "nats": "^2.29.3"

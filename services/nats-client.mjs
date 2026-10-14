@@ -30,6 +30,7 @@ export const STREAM_CONFIG = Object.freeze({
 // Limits that must match; drift is corrected rather than silently ignored (FINDING CLL-008).
 const ENFORCED_LIMITS = ["max_msgs", "max_bytes", "max_age", "duplicate_window", "discard"];
 
+/** Connect to the lab broker (NATS_URL, default loopback) with bounded reconnect attempts. */
 export async function connectToLab(name) {
   const servers = process.env.NATS_URL || "nats://127.0.0.1:4222";
   return connect({
@@ -41,6 +42,7 @@ export async function connectToLab(name) {
   });
 }
 
+/** Ensure the bounded LAB stream exists with the enforced limits, correcting drift, and return a JetStream client. */
 export async function ensureLabJetStream(connection) {
   const manager = await connection.jetstreamManager();
   let info = null;

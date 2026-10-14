@@ -19,6 +19,7 @@ Before/after evidence: the same fault-injection suite (`scripts/verify-integrati
 | CLL-009 | Medium | Event-loop blocking | Fixed |
 | CLL-010 | Low | Complexity | Fixed, metric-gated |
 | CLL-011 | Low | Container hardening | Fixed |
+| CLL-012 | Low | Documentation coverage | Fixed, metric-gated |
 
 ---
 
@@ -121,6 +122,12 @@ The worker also clamped future timestamps to zero age, so a future-dated event w
 ## CLL-011: Container ran as root (Low)
 
 **Correction:** the runtime image copies only the services, dependencies, and engine binary, and runs as the unprivileged `node` user.
+
+## CLL-012: Documentation coverage was 28% (Low)
+
+**Defect:** the new documentation-coverage metric (`scripts/doc_dependency_metrics.py`) measured 9 of 32 production functions with a preceding comment. The SOW lists documentation coverage as a required baseline metric, so the lab must measure it on itself.
+
+**Correction:** every production function now carries a one-line contract comment. Coverage is 32/32; CI fails below 60%. The same run confirmed no circular module dependencies and identified the four highest fan-in modules (`nats-client`, `event-contract`, `decision-model`, `failure-handling`) as the ones to review first after any change.
 
 ---
 
